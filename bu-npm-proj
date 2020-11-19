@@ -1,0 +1,8 @@
+echo backup npm project to icloud, sans node_modules
+if [ -z "$1" ]
+  then
+    echo
+    echo ERROR YO: arg1 -- full path of npm project yo
+    exit 1
+fi
+rsync -av --progress $1 ~/Library/Mobile\ Documents/com~apple~CloudDocs/proj/ --exclude node_modules

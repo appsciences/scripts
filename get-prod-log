@@ -1,0 +1,6 @@
+#!/bin/bash
+cd ~/Code/prism-backend/storage/logs
+# optionaly back up local Laravel log
+mv laravel.log laravel.log.bak
+# download production log
+sftp forge@api.prism.fm:api.prism.fm/storage/logs/laravel.log 

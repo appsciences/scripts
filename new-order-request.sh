@@ -1,0 +1,31 @@
+# curl https://www.venuepilot.co/events/35825/orders \
+curl http://localhost:3000/events/35825/orders \
+-d authenticity_token=NtDrcW3y7o0SHkYUqjnkqdiOOJnAE+dLhebvdv6dp+ykQXAYeWAck7d3t2wAeof6Mu1DHb0hBtKuyiawO42aRA== \
+-d modal=true \
+-d "order[blueprint_map_attributes][12373][quantity]"=0 \
+-d "discount[code]"= \
+-d "discount[event_id]"=35690 \
+-d "order[sales_tax]"=2.35 \
+-d "order[processing_fee]"=1.14 \
+-d "order[donation]"=0.00 \
+-d "g-recaptcha-response"=03AGdBq24Or4_z7ZYCUTlCboXy2Ai64Gr4VhHRRYHFjXEdRRAyoBZ98h3rvyndnNd41dGcD55rYXx-tm-8woE8eXi73kUy53vuZ19Yn36K0p4Jxxu26uTcc-StV6iCxUZlPsId1VWCN9XZpOdj5n2O1yTlmSXlyGaku0hTo-gU3n5Zq2VNhyiDPo3LnkBHGW2kJYb_nXJsxucAJSX4pfAu7BPLmG3hoO2s3MPF0iTIWzVKCC2CE9DHZUf01N9A7bQDuMG19QfwGGLUzGgjZumxtoDU4wZVQswueFG8HMpUAYOzop2CYQ0KqsT5BswL_k69CpuKvbGt7J0wIvi6fwtMVuVuGVONtCrI4ZV84T16VYGj_NUJwpIqHQOFg3tWqGn5BFBp_tS03RF_SEkvn_mLKPZe5o5j-rNgS1T-434YIyO10i_-H6f_FsOyii350h5m6DdG229SuPJy \
+-d "order[customer_attributes][first_name]"=Lev \
+-d "order[customer_attributes][last_name]"=Pelekh \
+-d "order[customer_attributes][email]"=leopelekh@gmail.com \
+-d "order[address_attributes][street1]"=23-18 21st Ave \
+-d "order[address_attributes][city]"=Astoria \
+-d "order[address_attributes][state]"=NY \
+-d "order[address_attributes][postal_code]"=11105 \
+-d "order[address_attributes][country]"=US \
+-d "order[delivery_method]"=willcall \
+-d "order[cc_type]"=master \
+-d "order[credit_card_number]"=4242 4242 4242 4242 \
+-d "order[expiration_month]"=3 \
+-d "order[expiration_year]"=2025 \
+-d "order[cvv_code]"=111 \
+-d "order[terms_of_service]"=0 \
+-d "order[terms_of_service]"=1 \
+-d "order_lock_digest"=5e99b448938d3fef6f605733de0181d2ab36d242ee3fea7545d477e864146630 \
+# -d "order[seats]"={"12372":["GeneralAdmission"]} \
+-d "order[tables]"=[] \
+-d "order[payment_token]"=tok_1HgjPcFd1YKCuOompIlSHjio

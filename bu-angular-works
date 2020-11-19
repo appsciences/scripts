@@ -1,0 +1,1 @@
+rsync -av --progress /Users/idiot/proj/venuepilot ~/Library/Mobile\ Documents/com~apple~CloudDocs/proj/ --exclude node_modules
