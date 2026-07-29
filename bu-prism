@@ -1,2 +1,1 @@
-rsync -av --progress /Users/idiot/proj/prism-backend ~/Library/Mobile\ Documents/com~apple~CloudDocs/proj/ --exclude node_modules --exclude vendor
-rsync -av --progress /Users/idiot/Code/prism-angular ~/Library/Mobile\ Documents/com~apple~CloudDocs/proj/ --exclude node_modules
+rsync -av --progress /Users/leopelekh/dev/Clients/Yesim/Chys ~/Library/Mobile\ Documents/com~apple~CloudDocs/proj/ --exclude node_modules --exclude vendor
