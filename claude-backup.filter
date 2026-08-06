@@ -1,0 +1,66 @@
+# dev-backup filter for ~/.claude — rsync filter rules, first match wins.
+#
+# This file is an ALLOW-list, the opposite of dev-backup.excludes, and that is
+# deliberate. ~/.claude is 195 MB, of which ~360 KB is hand-authored and the
+# rest is session state that Claude Code regenerates on demand:
+#
+#     projects/*.jsonl   92 MB   conversation transcripts
+#     jobs/              76 MB   background-job scratch
+#     file-history/      18 MB   edit checkpoints
+#     plugins/marketplaces  6 MB git clones, re-pulled automatically
+#
+# A deny-list would need updating every time Claude Code adds a new cache
+# directory, and would silently bloat the archive until someone noticed. An
+# allow-list fails the safe way: something new is missed, not hoarded.
+#
+# NOTE: credentials are NOT here. Claude Code keeps auth in the macOS login
+# Keychain, so no token is ever written into the archive. Re-login after a
+# restore.
+#
+# "+" includes, "-" excludes, "/" anchors to the top of ~/.claude.
+# Used with rsync -m so allowed-but-empty parent directories are pruned.
+
+# --- global configuration ----------------------------------------------------
++ /CLAUDE.md
++ /settings.json
++ /settings.local.json
++ /keybindings.json
++ /.mcp.json
++ /mcp.json
+
+# --- customizations you wrote yourself ---------------------------------------
++ /agents/
++ /agents/**
++ /commands/
++ /commands/**
++ /skills/
++ /skills/**
++ /hooks/
++ /hooks/**
++ /output-styles/
++ /output-styles/**
+
+# --- accumulated memory ------------------------------------------------------
+# agent-memory/ is per-subagent; projects/<slug>/memory/ is per-repo. Both are
+# built up slowly over many sessions and cannot be reconstructed.
++ /agent-memory/
++ /agent-memory/**
+
+# --- plugins: keep the manifest, drop the re-downloadable clones --------------
++ /plugins/
++ /plugins/installed_plugins.json
++ /plugins/known_marketplaces.json
+- /plugins/**
+
+# --- project memory, but not conversation transcripts ------------------------
+# Order matters: the memory rules must precede the blanket projects/ exclusion.
++ /projects/
++ /projects/*/
++ /projects/*/memory/
++ /projects/*/memory/**
+- /projects/**
+
+# --- everything else is regenerable ------------------------------------------
+# jobs/, file-history/, shell-snapshots/, session-env/, sessions/, telemetry/,
+# cache/, paste-cache/, daemon*, history.jsonl, stats-cache.json, backups/, ...
+- *
