@@ -1,0 +1,112 @@
+# dev-backup static exclusions — rsync filter patterns, one per line.
+#
+# ONLY put names here that are never source. Ambiguous ones (build/, dist/,
+# out/, target/, coverage/) are handled dynamically by dev-backup.sh: skipped
+# only when git already ignores them, or when a pubspec.yaml marks the project
+# as Flutter. That is deliberate — ~/dev/deskreen/build holds tracked icons and
+# entitlements that a blanket rule would throw away.
+#
+# A leading "/" anchors a pattern to the top of the source directory.
+# A trailing "/" restricts it to directories.
+# A bare name with no slash matches at any depth.
+
+# --- node / npm / yarn / pnpm ------------------------------------------------
+# Trailing "*" also catches renamed copies left behind by editors and installers
+# (e.g. "node_modules 11.48.10 AM", 553 MB of it under callsniper-projects).
+node_modules*/
+.npm/
+.pnpm-store/
+.yarn/cache/
+.yarn/unplugged/
+.yarn/install-state.gz
+npm-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# --- JS framework + bundler output/caches (never source) ---------------------
+.next/
+.nuxt/
+.svelte-kit/
+.astro/
+.angular/
+.docusaurus/
+.turbo/
+.parcel-cache/
+.vite/
+.rollup.cache/
+.eslintcache
+*.tsbuildinfo
+.cache/
+storybook-static/
+
+# --- Flutter / Dart ----------------------------------------------------------
+# The Flutter SDK checkout itself: ~4 GB and fully reinstallable. Delete this
+# line if you want the SDK (and any local engine patches) backed up too.
+/flutter/
+.dart_tool/
+.flutter-plugins
+.flutter-plugins-dependencies
+.packages
+.pub-cache/
+.symlinks/
+ephemeral/
+
+# --- iOS / macOS / Xcode -----------------------------------------------------
+Pods/
+DerivedData/
+xcuserdata/
+*.xcuserdatad/
+
+# --- Android / Gradle --------------------------------------------------------
+.gradle/
+.cxx/
+captures/
+local.properties
+
+# --- Python ------------------------------------------------------------------
+__pycache__/
+*.pyc
+*.pyo
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.tox/
+.venv/
+.venv*/
+venv/
+*.egg-info/
+
+# --- Other toolchains --------------------------------------------------------
+.terraform/
+.serverless/
+.expo/
+.expo-shared/
+
+# --- Claude Code worktrees ---------------------------------------------------
+# Throwaway checkouts of branches that already live in .git — 4.1 GB across
+# notedude2/lickdude/shred_invaders. Every branch in them is recoverable with
+# "git worktree add", and .git is always backed up, so nothing is lost.
+# Verified empty of real work: the only uncommitted files were .playwright-mcp/,
+# tsconfig.tsbuildinfo and a stray node_modules.
+.claude/worktrees/
+
+# --- Not source: media library -----------------------------------------------
+# ~/dev/fed-docs is 1.4 GB of video and photos (463 .mp4 files alone), not code.
+# It lives under ~/dev for convenience only. Remove this line if you want it.
+/fed-docs/
+
+# --- Live database data directories ------------------------------------------
+# A file-level copy of a running Postgres cluster is not a valid backup — it can
+# capture a torn state mid-write. Use pg_dump if you need the data. Restore by
+# re-running migrations.
+postgres_db/
+pgdata/
+
+# --- macOS / editor noise ----------------------------------------------------
+.DS_Store
+._*
+.Spotlight-V100/
+.Trashes/
+.fseventsd/
+*.swp
+*~
